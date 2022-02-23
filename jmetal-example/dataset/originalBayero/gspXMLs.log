@@ -1,0 +1,35 @@
+23-Mar-21 09:45:15.213 [Solver] INFO  util.Progress> [Solving problem ...]
+23-Mar-21 09:45:15.213 [Solver] INFO  solver.Solver> Using org.cpsolver.ifs.termination.GeneralTerminationCondition
+23-Mar-21 09:45:15.213 [Solver] INFO  solver.Solver> Using org.cpsolver.ifs.solution.GeneralSolutionComparator
+23-Mar-21 09:45:15.213 [Solver] INFO  solver.Solver> Using org.cpsolver.exam.heuristics.ExamNeighbourSelection
+23-Mar-21 09:45:15.213 [Solver] INFO  heuristics.StandardNeighbourSelection> Using org.cpsolver.ifs.heuristics.GeneralValueSelection
+23-Mar-21 09:45:15.213 [Solver] INFO  heuristics.StandardNeighbourSelection> Using org.cpsolver.ifs.heuristics.GeneralVariableSelection
+23-Mar-21 09:45:15.229 [Solver] INFO  solver.Solver> Using org.cpsolver.ifs.perturbations.DefaultPerturbationsCounter
+23-Mar-21 09:45:15.244 [Solver] INFO  util.JProf> Using wall time.
+23-Mar-21 09:45:15.276 [Solver] INFO  solver.Solver> Initial solution:[
+    Assigned variables: 0.00% (0/8)
+    Iteration: 0
+    Number of Exams: 8
+    Number of Exams Requiring Alt Seating: 8
+    Number of Periods: 12
+    Number of Rooms: 32
+    Number of Small Exams (Exams W/O Room): 0
+    Number of Student Exams: 0
+    Number of Students: 23738
+    Number of Students with 1 meeting: 17941
+    Number of Students with 2 meetings: 4218
+    Number of Students with 3 meetings: 1570
+    Number of Students with 4 meetings: 9
+    Overall solution value: 0.00
+    Time: 0.00 min
+  ]
+23-Mar-21 09:45:15.276 [Solver] INFO  exam.Test> **BEST[0]** V:0/8 - T:0.00 [@P:�, BTB:0, DC:0, M2D:0, PI:�, PP:0, PS:�, RP:0, RSd:�, RSp:0, RSz:�, iBTB:0, iDC:0, iM2D:0]
+23-Mar-21 09:45:15.276 [Solver] INFO  heuristics.ExamNeighbourSelection> ***** construction phase *****
+23-Mar-21 09:45:15.276 [Solver] INFO  util.Progress> [Solver] Construction ...
+23-Mar-21 09:45:15.307 [Solver] INFO  exam.Test> **BEST[1]** V:1/8 - T:40.00 [@P:�, BTB:0, DC:0, M2D:0, PI:0, PP:0, PS:0, RP:0, RSd:0.04, RSp:4, RSz:17, iBTB:0, iDC:0, iM2D:0]
+23-Mar-21 09:45:15.307 [Solver] INFO  heuristics.ExamNeighbourSelection> ***** cbs/tabu-search phase *****
+23-Mar-21 09:45:15.307 [Solver] ERROR model.Exam> Exam 1 has no placement.
+23-Mar-21 09:45:15.307 [Solver] INFO  heuristics.ExamNeighbourSelection> ***** hill climbing phase *****
+23-Mar-21 09:45:15.307 [Solver] INFO  util.Progress> [Solver] Hill Climber...
+23-Mar-21 09:45:15.604 [Solver] INFO  heuristics.ExamNeighbourSelection> ***** simulated annealing phase *****
+23-Mar-21 09:45:15.604 [Solver] INFO  util.Progress> [Solver] Simulated Annealing...

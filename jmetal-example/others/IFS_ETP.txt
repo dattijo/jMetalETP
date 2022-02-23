@@ -1,0 +1,48 @@
+Iterative Forward Search algorithm 
+
+procedure ifs(V,D,C,α) // an initial assignment α is the parameter
+	σ = α; // current assignment
+	β = α; // best assignmen
+ 
+ 	while canContinue(σ) do // CSP problem Φ=(V,D,C) is
+ 		//It first tries to find those variables that are most difficult to assign. A variable 
+		//is randomly selected among unassigned variables with the smallest ratio of domain
+		//size to the number of hard constraints. 
+
+ 		A = selectVariable(σ); // a global parameter
+		
+		//It then tries to select the best value to assign to the selected variable.
+		//A value whose assignment increases the overall cost of the solution the least
+		//is selected among values that violate the smallest number of hard constraints
+		//(i.e., the number of conflicting variables that need to be unassigned in order to
+		//make the problem feasible after assignment of the selected value to the selected
+		//variable is minimized). If there is a tie, one of these is selected randomly
+
+		a = selectValue(σ, A); // for all used functions
+ 
+ 		//an unassigned variable (i.e., a class, or exam) is selected and a value from its
+		//domain is assigned to it (assignment of a room and a time)
+
+ 		η = conflicts(σ, A, a); //conflicting assignments
+
+ 		//If this causes any violations of hard constraints with existing assignments,
+		//the conflicting variables are unassigned.
+		//Conflict-based Statistics [5] is used during this process to prevent repetitive
+		//assignments of the same values by memorizing conflicting assignments. 
+		//Conflictbased Statistics is a data structure that memorizes hard conflicts which have
+		//occurred during the search together with their frequency and the assignments
+		//that caused them. More precisely, it is an array
+
+			//CBS[Va = va --> ~| Vb = vb] = cab:
+		//This means that the assignment Va = va has caused a hard conflict cab times
+		//in the past with the assignment Vb = vb.
+
+ 		σ = (σ - η) ∪ {A/a}; //next assignment
+
+ 		if better(σ, β) then β = σ;
+ 	end while
+
+ 	//The search ends when all variables are assigned.
+
+ 	return β;
+end procedure 

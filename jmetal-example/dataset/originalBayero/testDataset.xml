@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--Examination Timetable-->
+<examtt version="1.0" year="2019" created="Tue Mar 16 09:49:00 GMT 2021">
+<periods>
+	<period id="1" length="180" day="Mon 06/10" time="8:30a - 11:30a" penalty="0"/>
+	<period id="2" length="180" day="Mon 06/10" time="12:00p - 3:00p" penalty="0"/>
+	<period id="3" length="120" day="Mon 06/10" time="15:30p - 5:30p" penalty="0"/>
+	<period id="4" length="180" day="Tue 06/11" time="8:30a - 11:30a" penalty="0"/>
+	<period id="5" length="180" day="Tue 06/11" time="12:00p - 3:00p" penalty="0"/>
+	<period id="6" length="120" day="Tue 06/11" time="15:30p - 5:30p" penalty="0"/>
+	<period id="7" length="180" day="Thu 06/13" time="8:30a - 11:30a" penalty="0"/>
+	<period id="8" length="180" day="Thu 06/13" time="12:00p - 3:00p" penalty="0"/>
+	<period id="9" length="120" day="Thu 06/13" time="15:30p - 5:30p" penalty="0"/>
+	<period id="10" length="180" day="Fri 06/14" time="8:30a - 11:30a" penalty="0"/>
+</periods>
+<rooms>
+	<room id="1" size="600" alt="300" coordinates="11.982244, 8.480013"/>
+	<room id="2" size="280" alt="140" coordinates="11.974247, 8.428852"/>
+	<room id="3" size="360" alt="180" coordinates="11.974773, 8.424895"/>
+	<room id="4" size="160" alt="80" coordinates="11.974202, 8.425449"/>
+	<room id="5" size="160" alt="80" coordinates="11.974148, 8.425388"/>
+</rooms>
+<exams>
+	<exam id="1" length="180" alt="true">
+		<period id="1" />
+		<period id="2" />
+		<period id="3" />
+		<period id="4" />
+		<period id="5" />
+		<period id="6" />
+		<period id="7" />
+		<period id="8" />
+		<period id="9" />
+		<period id="10" />		
+		<room id="1" />
+		<room id="2" />
+		<room id="3" />
+		<room id="4" />
+		<room id="5" />		
+	</exam>
+	<exam id="2" length="180" alt="true">
+		<period id="1" />
+		<period id="2" />
+		<period id="3" />
+		<period id="4" />
+		<period id="5" />
+		<period id="6" />
+		<period id="7" />
+		<period id="8" />
+		<period id="9" />
+		<period id="10" />
+		<room id="1" />
+		<room id="2" />
+		<room id="3" />
+		<room id="4" />
+		<room id="5" />
+	</exam>
+</exams>
+<students>
+	<student id="1">
+		<exam id="1"/>
+	</student>
+	<student id="2">
+		<exam id="2"/>
+	</student>
+	<student id="3">
+		<exam id="1"/>
+	</student>
+	<student id="4">
+		<exam id="2"/>
+	</student>
+	<student id="5">
+		<exam id="1"/>
+	</student>
+	<student id="6">
+		<exam id="2"/>
+	</student>
+	<student id="7">
+		<exam id="1"/>
+	</student>
+	<student id="8">
+		<exam id="2"/>
+	</student>
+	<student id="9">
+		<exam id="1"/>
+	</student>
+	<student id="10">
+		<exam id="2"/>
+		<exam id="1"/>
+	</student>
+</students>
+<instructors/>
+<constraints>
+	<same-period id="1">
+		<exam id="2" />
+		<exam id="1" />
+	</same-period>
+</constraints>
+</examtt>

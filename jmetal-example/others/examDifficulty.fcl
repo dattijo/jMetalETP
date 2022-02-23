@@ -1,0 +1,109 @@
+FUNCTION_BLOCK examDifficulty	// Block definition (there may be more than one block per file)
+
+VAR_INPUT				// Define input variables
+	credits : REAL;
+	type : REAL;
+	sratio : REAL;
+	pdifficulty : REAL;
+END_VAR
+
+VAR_OUTPUT				// Define output variable
+	difficulty : REAL;
+END_VAR
+
+FUZZIFY credits			// Fuzzify input variable 'credits': {'low', 'average', 'high'}
+	TERM low := GAUSS 0.375 1.5;
+	TERM average := GAUSS 0.375 2.5;
+	TERM high := GAUSS 0.375 3.5;
+END_FUZZIFY
+
+FUZZIFY type			// Fuzzify input variable 'type': { 'core', 'elective' }
+	TERM core := SIGM -15 0.5; 
+	TERM elective :=  SIGM 15 0.5;
+END_FUZZIFY
+
+FUZZIFY sratio			// Fuzzify input variable 'sratio': {'low', 'average', 'high'}
+	TERM low := GAUSS 0.1 0.1;
+	TERM average := GAUSS 0.1 0.5;
+	TERM high := GAUSS 0.1 0.9;
+END_FUZZIFY
+
+FUZZIFY pdifficulty			// Fuzzify input variable 'pdifficulty': {'easy', 'moderate', 'hard'}
+	TERM easy := GAUSS 0.375 1.5;
+	TERM moderate := GAUSS 0.375 2.5;
+	TERM hard := GAUSS 0.375 3.5;
+END_FUZZIFY
+
+DEFUZZIFY difficulty			// Defzzzify output variable 'difficulty' : {'very_low', 'somewhat_low', 'low', 'average', 'high', 'somewhat_high', 'very_high' }
+	TERM very_low := TRIAN 0 1 2;
+	TERM low := TRIAN 1 2 3;
+	TERM average := TRIAN 2 3 4;
+	TERM high := TRIAN 3 4 5;
+	TERM very_high := TRIAN 4 5 6;
+	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
+	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
+END_DEFUZZIFY
+
+RULEBLOCK No1
+	AND : MIN;			// Use 'min' for 'and' (also implicit use 'max' for 'or' to fulfill DeMorgan's Law)
+	ACT : MIN;			// Use 'min' activation method
+	ACCU : MAX;			// Use 'max' accumulation method
+	
+	RULE 1: IF credits IS low AND sratio IS high AND type IS elective AND pdifficulty IS easy THEN difficulty IS very_low;
+	RULE 2: IF credits IS low AND sratio IS high AND type IS elective AND pdifficulty IS moderate THEN difficulty IS very_low;
+	RULE 3: IF credits IS low AND sratio IS high AND type IS elective AND pdifficulty IS hard THEN difficulty IS low;
+	RULE 4: IF credits IS low AND sratio IS high AND type IS core AND pdifficulty IS easy THEN difficulty IS very_low;
+	RULE 5: IF credits IS low AND sratio IS high AND type IS core AND pdifficulty IS moderate THEN difficulty IS low;
+	RULE 6: IF credits IS low AND sratio IS high AND type IS core AND pdifficulty IS hard THEN difficulty IS average;
+	RULE 7: IF credits IS low AND sratio IS average AND type IS elective AND pdifficulty IS easy THEN difficulty IS very_low;
+	RULE 8: IF credits IS low AND sratio IS average AND type IS elective AND pdifficulty IS moderate THEN difficulty IS low;
+	RULE 9: IF credits IS low AND sratio IS average AND type IS elective AND pdifficulty IS hard THEN difficulty IS average;
+	RULE 10: IF credits IS low AND sratio IS average AND type IS core AND pdifficulty IS easy THEN difficulty IS low;
+	RULE 11: IF credits IS low AND sratio IS average AND type IS core AND pdifficulty IS moderate THEN difficulty IS average;
+	RULE 12: IF credits IS low AND sratio IS average AND type IS core AND pdifficulty IS hard THEN difficulty IS average;
+	RULE 13: IF credits IS low AND sratio IS low AND type IS elective AND pdifficulty IS easy THEN difficulty IS low;
+	RULE 14: IF credits IS low AND sratio IS low AND type IS elective AND pdifficulty IS moderate THEN difficulty IS average;
+	RULE 15: IF credits IS low AND sratio IS low AND type IS elective AND pdifficulty IS hard THEN difficulty IS average;
+	RULE 16: IF credits IS low AND sratio IS low AND type IS core AND pdifficulty IS easy THEN difficulty IS average;
+	RULE 17: IF credits IS low AND sratio IS low AND type IS core AND pdifficulty IS moderate THEN difficulty IS average;
+	RULE 18: IF credits IS low AND sratio IS low AND type IS core AND pdifficulty IS hard THEN difficulty IS high;
+	RULE 19: IF credits IS average AND sratio IS high AND type IS elective AND pdifficulty IS easy THEN difficulty IS very_low;
+	RULE 20: IF credits IS average AND sratio IS high AND type IS elective AND pdifficulty IS moderate THEN difficulty IS low;
+	RULE 21: IF credits IS average AND sratio IS high AND type IS elective AND pdifficulty IS hard THEN difficulty IS average;
+	RULE 22: IF credits IS average AND sratio IS high AND type IS core AND pdifficulty IS easy THEN difficulty IS low;
+	RULE 23: IF credits IS average AND sratio IS high AND type IS core AND pdifficulty IS moderate THEN difficulty IS average;
+	RULE 24: IF credits IS average AND sratio IS high AND type IS core AND pdifficulty IS hard THEN difficulty IS average;
+	RULE 25: IF credits IS average AND sratio IS average AND type IS elective AND pdifficulty IS easy THEN difficulty IS low;
+	RULE 26: IF credits IS average AND sratio IS average AND type IS elective AND pdifficulty IS moderate THEN difficulty IS average;
+	RULE 27: IF credits IS average AND sratio IS average AND type IS elective AND pdifficulty IS hard THEN difficulty IS average;
+	RULE 28: IF credits IS average AND sratio IS average AND type IS core AND pdifficulty IS easy THEN difficulty IS average;
+	RULE 29: IF credits IS average AND sratio IS average AND type IS core AND pdifficulty IS moderate THEN difficulty IS average;
+	RULE 30: IF credits IS average AND sratio IS average AND type IS core AND pdifficulty IS hard THEN difficulty IS high;
+	RULE 31: IF credits IS average AND sratio IS low AND type IS elective AND pdifficulty IS easy THEN difficulty IS average;
+	RULE 32: IF credits IS average AND sratio IS low AND type IS elective AND pdifficulty IS moderate THEN difficulty IS average;
+	RULE 33: IF credits IS average AND sratio IS low AND type IS elective AND pdifficulty IS hard THEN difficulty IS high;
+	RULE 34: IF credits IS average AND sratio IS low AND type IS core AND pdifficulty IS easy THEN difficulty IS average;
+	RULE 35: IF credits IS average AND sratio IS low AND type IS core AND pdifficulty IS moderate THEN difficulty IS high;
+	RULE 36: IF credits IS average AND sratio IS low AND type IS core AND pdifficulty IS hard THEN difficulty IS very_high;
+	RULE 37: IF credits IS high AND sratio IS high AND type IS elective AND pdifficulty IS easy THEN difficulty IS low;
+	RULE 38: IF credits IS high AND sratio IS high AND type IS elective AND pdifficulty IS moderate THEN difficulty IS average;
+	RULE 39: IF credits IS high AND sratio IS high AND type IS elective AND pdifficulty IS hard THEN difficulty IS average;
+	RULE 40: IF credits IS high AND sratio IS high AND type IS core AND pdifficulty IS easy THEN difficulty IS average;
+	RULE 41: IF credits IS high AND sratio IS high AND type IS core AND pdifficulty IS moderate THEN difficulty IS average;
+	RULE 42: IF credits IS high AND sratio IS high AND type IS core AND pdifficulty IS hard THEN difficulty IS high;
+	RULE 43: IF credits IS high AND sratio IS average AND type IS elective AND pdifficulty IS easy THEN difficulty IS average;
+	RULE 44: IF credits IS high AND sratio IS average AND type IS elective AND pdifficulty IS moderate THEN difficulty IS average;
+	RULE 45: IF credits IS high AND sratio IS average AND type IS elective AND pdifficulty IS hard THEN difficulty IS high;
+	RULE 46: IF credits IS high AND sratio IS average AND type IS core AND pdifficulty IS easy THEN difficulty IS average;
+	RULE 47: IF credits IS high AND sratio IS average AND type IS core AND pdifficulty IS moderate THEN difficulty IS high;
+	RULE 48: IF credits IS high AND sratio IS average AND type IS core AND pdifficulty IS hard THEN difficulty IS very_high;
+	RULE 49: IF credits IS high AND sratio IS low AND type IS elective AND pdifficulty IS easy THEN difficulty IS average;
+	RULE 50: IF credits IS high AND sratio IS low AND type IS elective AND pdifficulty IS moderate THEN difficulty IS high;
+	RULE 51: IF credits IS high AND sratio IS low AND type IS elective AND pdifficulty IS hard THEN difficulty IS very_high;
+	RULE 52: IF credits IS high AND sratio IS low AND type IS core AND pdifficulty IS easy THEN difficulty IS high;
+	RULE 53: IF credits IS high AND sratio IS low AND type IS core AND pdifficulty IS moderate THEN difficulty IS very_high;
+	RULE 54: IF credits IS high AND sratio IS low AND type IS core AND pdifficulty IS hard THEN difficulty IS very_high;
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
+
